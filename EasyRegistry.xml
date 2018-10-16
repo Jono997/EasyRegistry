@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EasyRegistry</name>
+    </assembly>
+    <members>
+        <member name="T:EasyRegistry">
+            <summary>
+            A library that allows for easy manipulation of the registry
+            </summary>
+        </member>
+        <member name="M:EasyRegistry.KeyExists(System.String)">
+            <summary>
+            Checks if the specified registry key exists
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <returns>true if keyName exists. false if not</returns>
+        </member>
+        <member name="M:EasyRegistry.ValueExists(System.String,System.String)">
+            <summary>
+            Checks if the specified name/value pair exists within the specified registry key
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <returns>true if valueName exists within keyName. false if valueName doesn't exist within keyName or keyName doesn't exist</returns>
+        </member>
+        <member name="M:EasyRegistry.GetValue(System.String,System.String,System.Type,System.Object)">
+            <summary>
+            Gets the specified name/value pair from the specified registry key
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <param name="valueType">The type of value to get from the registry</param>
+            <param name="returnAsNull">If the value aquired from the registry is returnAsNull, return null</param>
+            <returns>If the value of the name/value pair is equal to returnAsNull, return null
+            Otherwise, return the value</returns>
+            <exception cref="T:System.IO.IOException">keyName has been marked for deletion</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root
+            or keyName doesn't exist
+            or valueName doesn't exist within keyName
+            or returnAsNull's type isn't valueType</exception>
+        </member>
+        <member name="M:EasyRegistry.DeleteKey(System.String)">
+            <summary>
+            Deletes the specified registry key
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <exception cref="T:System.ArgumentException">keyName doesn't exist
+            or the root key in keyName isn't one of the supported root keys
+            or keyName is just the root key</exception>
+            <exception cref="T:System.ArgumentNullException">keyName is null</exception>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to delete the value</exception>
+            <exception cref="T:System.ObjectDisposedException">keyName is closed</exception>
+            <exception cref="T:System.UnauthorizedAccessException">keyName is read only</exception>
+        </member>
+        <member name="M:EasyRegistry.DeleteValue(System.String,System.String)">
+            <summary>
+            Deletes the specified name/value pair from the specified registry key
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <exception cref="T:System.ArgumentException">keyName doesn't exist
+            or valueName doesn't exist within keyName
+            or the root key in keyName isn't one of the supported root keys</exception>
+            <exception cref="T:System.ArgumentNullException">keyName is null or valueName is null</exception>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to delete the value</exception>
+            <exception cref="T:System.ObjectDisposedException">keyName is closed</exception>
+            <exception cref="T:System.UnauthorizedAccessException">keyName is read only</exception>
+        </member>
+        <member name="M:EasyRegistry.GetValueObject(System.String,System.String,System.Object)">
+            <summary>
+            Gets the specified name/value pair from the specified registry key
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <param name="returnAsNull">If the value aquired from the registry is returnAsNull, return null</param>
+            <returns>If the value of the name/value pair is equal to returnAsNull, return null
+            Otherwise, return the value</returns>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to read from keyName</exception>
+            <exception cref="T:System.IO.IOException">keyName has been marked for deletion</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root</exception>
+        </member>
+        <member name="M:EasyRegistry.SetValue(System.String,System.String,System.Object,Microsoft.Win32.RegistryValueKind)">
+            <summary>
+            Sets the specified name/value pair on the specified registry key.
+            Creates the registry key if it doesn't already exist
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <param name="value">The value to store</param>
+            <param name="valueKind">The type to store the data as</param>
+            <exception cref="T:System.ArgumentNullException">value is null</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root or keyName is longer than 255 characters</exception>
+            <exception cref="T:System.UnauthorizedAccessException">keyname is a read-only key</exception>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to write to the registry</exception>
+        </member>
+        <member name="M:EasyRegistry.GetValueBool(System.String,System.String)">
+            <summary>
+            Gets the specified name/value pair from the specified registry key
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <returns>The value of the name/value pair</returns>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to read from keyName</exception>
+            <exception cref="T:System.IO.IOException">keyName has been marked for deletion</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root</exception>
+        </member>
+        <member name="M:EasyRegistry.SetValue(System.String,System.String,System.Boolean)">
+            <summary>
+            Sets the specified name/value pair on the specified registry key.
+            Creates the registry key if it doesn't already exist
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <param name="value">The value to store</param>
+            <exception cref="T:System.ArgumentNullException">value is null</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root or keyName is longer than 255 characters</exception>
+            <exception cref="T:System.UnauthorizedAccessException">keyname is a read-only key</exception>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to write to the registry</exception>
+        </member>
+        <member name="M:EasyRegistry.GetValueInt(System.String,System.String)">
+            <summary>
+            Gets the specified name/value pair from the specified registry key
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <returns>The value of the name/value pair</returns>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to read from keyName</exception>
+            <exception cref="T:System.IO.IOException">keyName has been marked for deletion</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root</exception>
+        </member>
+        <member name="M:EasyRegistry.SetValue(System.String,System.String,System.Int32)">
+            <summary>
+            Sets the specified name/value pair on the specified registry key.
+            Creates the registry key if it doesn't already exist
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <param name="value">The value to store</param>
+            <exception cref="T:System.ArgumentNullException">value is null</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root or keyName is longer than 255 characters</exception>
+            <exception cref="T:System.UnauthorizedAccessException">keyname is a read-only key</exception>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to write to the registry</exception>
+        </member>
+        <member name="M:EasyRegistry.GetValueString(System.String,System.String,System.String)">
+            <summary>
+            Gets the specified name/value pair from the specified registry key
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <param name="returnAsNull">If the value aquired from the registry is returnAsNull, return null</param>
+            <returns>If the value of the name/value pair is equal to returnAsNull, return null
+            Otherwise, return the value</returns>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to read from keyName</exception>
+            <exception cref="T:System.IO.IOException">keyName has been marked for deletion</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root</exception>
+        </member>
+        <member name="M:EasyRegistry.SetValue(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Sets the specified name/value pair on the specified registry key.
+            Creates the registry key if it doesn't already exist
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <param name="value">The value to store</param>
+            <param name="expandString">If value contains unexpanded environment variables, set this to true to expand them when reading from this pair</param>
+            <exception cref="T:System.ArgumentNullException">value is null</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root or keyName is longer than 255 characters</exception>
+            <exception cref="T:System.UnauthorizedAccessException">keyname is a read-only key</exception>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to write to the registry</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root</exception>
+        </member>
+        <member name="M:EasyRegistry.SetValue(System.String,System.String,System.String)">
+            <summary>
+            Sets the specified name/value pair on the specified registry key.
+            Creates the registry key if it doesn't already exist
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <param name="value">The value to store</param>
+            <exception cref="T:System.ArgumentNullException">value is null</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root or keyName is longer than 255 characters</exception>
+            <exception cref="T:System.UnauthorizedAccessException">keyname is a read-only key</exception>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to write to the registry</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root</exception>
+        </member>
+        <member name="M:EasyRegistry.GetValueStringArray(System.String,System.String,System.String[])">
+            <summary>
+            Gets the specified name/value pair from the specified registry key
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <param name="returnAsNull">If the value aquired from the registry is returnAsNull, return null</param>
+            <returns>If the value of the name/value pair is equal to returnAsNull, return null
+            Otherwise, return the value</returns>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to read from keyName</exception>
+            <exception cref="T:System.IO.IOException">keyName has been marked for deletion</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root</exception>
+        </member>
+        <member name="M:EasyRegistry.SetValue(System.String,System.String,System.String[])">
+            <summary>
+            Sets the specified name/value pair on the specified registry key.
+            Creates the registry key if it doesn't already exist
+            </summary>
+            <param name="keyName">The full registry path of the key</param>
+            <param name="valueName">The name of the pair</param>
+            <param name="value">The value to store</param>
+            <exception cref="T:System.ArgumentNullException">value is null</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root or keyName is longer than 255 characters</exception>
+            <exception cref="T:System.UnauthorizedAccessException">keyname is a read-only key</exception>
+            <exception cref="T:System.Security.SecurityException">The user doesn't have permission to write to the registry</exception>
+            <exception cref="T:System.ArgumentException">keyName doesn't begin with a valid registry root</exception>
+        </member>
+    </members>
+</doc>
